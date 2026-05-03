@@ -204,6 +204,49 @@
 
     .todo-item button.delete-btn:hover { color: #e74c3c; }
 
+    .edit-due-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .edit-due-row input[type="datetime-local"] {
+      flex: 1;
+      padding: 5px 10px;
+      border: 2px solid #6c63ff;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+      color: #333;
+    }
+
+    .edit-due-row button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-save { background: #6c63ff; color: #fff; }
+    .btn-save:hover { background: #574fd6; }
+    .btn-cancel { background: #eee; color: #555; }
+    .btn-cancel:hover { background: #ddd; }
+    .btn-clear { background: #fdecea; color: #e74c3c; }
+    .btn-clear:hover { background: #f5c6c2; }
+
+    .badge.due { cursor: pointer; }
+    .badge.due:hover { opacity: 0.8; }
+    .badge.add-due {
+      background: #f0f0ff;
+      color: #6c63ff;
+      cursor: pointer;
+      border: 1px dashed #6c63ff;
+    }
+    .badge.add-due:hover { background: #e0deff; }
+
     .footer {
       margin-top: 16px;
       display: flex;
@@ -262,6 +305,7 @@
   <script>
     let todos = JSON.parse(localStorage.getItem('todos') || '[]');
     let filter = 'all';
+    let editingDueId = null;
 
     const input = document.getElementById('todo-input');
     const dueInput = document.getElementById('due-input');
@@ -295,6 +339,37 @@
       render();
     }
 
+    function startEditDue(id) {
+      editingDueId = id;
+      render();
+      const el = document.getElementById('edit-due-' + id);
+      if (el) el.focus();
+    }
+
+    function saveDue(id) {
+      const el = document.getElementById('edit-due-' + id);
+      const t = todos.find(t => t.id === id);
+      if (t && el) {
+        t.dueAt = el.value ? new Date(el.value).toISOString() : null;
+      }
+      editingDueId = null;
+      save();
+      render();
+    }
+
+    function clearDue(id) {
+      const t = todos.find(t => t.id === id);
+      if (t) t.dueAt = null;
+      editingDueId = null;
+      save();
+      render();
+    }
+
+    function cancelEditDue() {
+      editingDueId = null;
+      render();
+    }
+
     function remove(id) {
       todos = todos.filter(t => t.id !== id);
       save();
@@ -313,6 +388,12 @@
         document.getElementById('filter-' + name).classList.toggle('active', name === f);
       });
       render();
+    }
+
+    function toLocalDatetimeValue(iso) {
+      const d = new Date(iso);
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
     }
 
     function formatDate(iso) {
@@ -349,6 +430,8 @@
           const isOverdue = !t.done && status === 'overdue';
           const dueBadgeClass = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
           const dueLabel = status === 'overdue' ? '&#9888; Overdue' : status === 'soon' ? '&#9200; Due soon' : '&#128337;';
+          const isEditingDue = editingDueId === t.id;
+          const currentVal = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
 
           return `
             <li class="todo-item ${t.done ? 'done' : ''} ${isOverdue ? 'overdue' : ''}">
@@ -357,8 +440,20 @@
                 <span class="text">${escapeHtml(t.text)}</span>
                 <div class="todo-meta">
                   ${t.createdAt ? `<span class="badge created">Created: ${formatDate(t.createdAt)}</span>` : ''}
-                  ${t.dueAt ? `<span class="badge due ${dueBadgeClass}">${dueLabel} ${formatDate(t.dueAt)}</span>` : ''}
+                  ${t.dueAt && !isEditingDue
+                    ? `<span class="badge due ${dueBadgeClass}" onclick="startEditDue(${t.id})" title="Click to edit">${dueLabel} ${formatDate(t.dueAt)} &#9998;</span>`
+                    : ''}
+                  ${!t.dueAt && !isEditingDue
+                    ? `<span class="badge add-due" onclick="startEditDue(${t.id})">+ Add due date</span>`
+                    : ''}
                 </div>
+                ${isEditingDue ? `
+                  <div class="edit-due-row">
+                    <input type="datetime-local" id="edit-due-${t.id}" value="${currentVal}" />
+                    <button class="btn-save" onclick="saveDue(${t.id})">Save</button>
+                    <button class="btn-clear" onclick="clearDue(${t.id})">Clear</button>
+                    <button class="btn-cancel" onclick="cancelEditDue()">Cancel</button>
+                  </div>` : ''}
               </div>
               <button class="delete-btn" onclick="remove(${t.id})" title="Delete">&#x2715;</button>
             </li>

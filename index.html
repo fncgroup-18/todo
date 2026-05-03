@@ -148,11 +148,30 @@
       color: #333;
       word-break: break-word;
       display: block;
+      cursor: pointer;
     }
+
+    .todo-item .text:hover { color: #6c63ff; }
 
     .todo-item.done .text {
       text-decoration: line-through;
       color: #aaa;
+      cursor: default;
+    }
+
+    .edit-text-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .edit-text-row input[type="text"] {
+      flex: 1;
+      padding: 6px 10px;
+      border: 2px solid #6c63ff;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
     }
 
     .todo-meta {
@@ -306,6 +325,7 @@
     let todos = JSON.parse(localStorage.getItem('todos') || '[]');
     let filter = 'all';
     let editingDueId = null;
+    let editingTextId = null;
 
     const input = document.getElementById('todo-input');
     const dueInput = document.getElementById('due-input');
@@ -336,6 +356,28 @@
       const t = todos.find(t => t.id === id);
       if (t) t.done = !t.done;
       save();
+      render();
+    }
+
+    function startEditText(id) {
+      editingTextId = id;
+      editingDueId = null;
+      render();
+      const el = document.getElementById('edit-text-' + id);
+      if (el) { el.focus(); el.select(); }
+    }
+
+    function saveText(id) {
+      const el = document.getElementById('edit-text-' + id);
+      const t = todos.find(t => t.id === id);
+      if (t && el && el.value.trim()) t.text = el.value.trim();
+      editingTextId = null;
+      save();
+      render();
+    }
+
+    function cancelEditText() {
+      editingTextId = null;
       render();
     }
 
@@ -431,13 +473,22 @@
           const dueBadgeClass = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
           const dueLabel = status === 'overdue' ? '&#9888; Overdue' : status === 'soon' ? '&#9200; Due soon' : '&#128337;';
           const isEditingDue = editingDueId === t.id;
+          const isEditingText = editingTextId === t.id;
           const currentVal = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
 
           return `
             <li class="todo-item ${t.done ? 'done' : ''} ${isOverdue ? 'overdue' : ''}">
               <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})" />
               <div class="todo-body">
-                <span class="text">${escapeHtml(t.text)}</span>
+                ${isEditingText ? `
+                  <div class="edit-text-row">
+                    <input type="text" id="edit-text-${t.id}" value="${escapeHtml(t.text)}"
+                      onkeydown="if(event.key==='Enter')saveText(${t.id});if(event.key==='Escape')cancelEditText();" />
+                    <button class="btn-save" onclick="saveText(${t.id})">Save</button>
+                    <button class="btn-cancel" onclick="cancelEditText()">Cancel</button>
+                  </div>` :
+                  `<span class="text" onclick="${t.done ? '' : `startEditText(${t.id})`}" title="${t.done ? '' : 'Click to edit'}">${escapeHtml(t.text)}</span>`
+                }
                 <div class="todo-meta">
                   ${t.createdAt ? `<span class="badge created">Created: ${formatDate(t.createdAt)}</span>` : ''}
                   ${t.dueAt && !isEditingDue

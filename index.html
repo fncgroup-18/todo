@@ -21,13 +21,170 @@
       max-width: 520px;
     }
 
-    h1 {
-      font-size: 2rem;
+    /* ── Auth Screen ── */
+    .auth-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .auth-card h1 {
+      font-size: 1.8rem;
       font-weight: 700;
       color: #1a1a2e;
-      margin-bottom: 24px;
+      margin-bottom: 6px;
       text-align: center;
     }
+
+    .auth-card p.subtitle {
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    .auth-card input[type="email"],
+    .auth-card input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .auth-card input:focus { border-color: #6c63ff; }
+
+    .auth-btns {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      padding: 12px;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #574fd6; }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 12px;
+      background: #f0f0ff;
+      color: #6c63ff;
+      border: 2px solid #d0cbff;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: #e0deff; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0;
+      color: #ccc;
+      font-size: 0.85rem;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+
+    .btn-google {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      color: #333;
+    }
+
+    .btn-google:hover { border-color: #6c63ff; background: #fafafa; }
+
+    .auth-error {
+      color: #e74c3c;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      min-height: 20px;
+      text-align: center;
+    }
+
+    /* ── App Screen ── */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .app-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .user-email {
+      font-size: 0.85rem;
+      color: #666;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn-signout {
+      padding: 6px 12px;
+      background: none;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #999;
+      transition: all 0.2s;
+    }
+
+    .btn-signout:hover { border-color: #e74c3c; color: #e74c3c; }
 
     .input-group {
       background: #fff;
@@ -40,10 +197,7 @@
       gap: 10px;
     }
 
-    .input-row {
-      display: flex;
-      gap: 8px;
-    }
+    .input-row { display: flex; gap: 8px; }
 
     input[type="text"] {
       flex: 1;
@@ -138,9 +292,12 @@
       margin-top: 3px;
     }
 
-    .todo-body {
-      flex: 1;
-      min-width: 0;
+    .todo-body { flex: 1; min-width: 0; }
+
+    .todo-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .todo-item .text {
@@ -150,16 +307,7 @@
       display: block;
     }
 
-    .todo-item.done .text {
-      text-decoration: line-through;
-      color: #aaa;
-    }
-
-    .todo-title-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .todo-item.done .text { text-decoration: line-through; color: #aaa; }
 
     .btn-edit-text {
       background: none;
@@ -174,6 +322,26 @@
     }
 
     .btn-edit-text:hover { color: #6c63ff; }
+
+    .todo-meta {
+      margin-top: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .badge.created { background: #f0f0ff; color: #6c63ff; }
+    .badge.due     { background: #fff3e0; color: #e67e22; }
+    .badge.due.overdue { background: #fdecea; color: #e74c3c; }
+    .badge.due.soon    { background: #fff8e1; color: #f39c12; }
 
     .edit-panel {
       margin-top: 10px;
@@ -200,8 +368,6 @@
       border: 2px solid #d0cbff;
       border-radius: 8px;
       font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
     }
 
     .edit-panel input[type="text"]:focus { border-color: #6c63ff; }
@@ -212,53 +378,17 @@
       border: 2px solid #d0cbff;
       border-radius: 8px;
       font-size: 0.9rem;
-      outline: none;
       color: #555;
-      transition: border-color 0.2s;
     }
 
     .edit-panel input[type="datetime-local"]:focus { border-color: #6c63ff; }
 
-    .edit-panel-actions {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
+    .edit-panel-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 
-    .todo-meta {
-      margin-top: 5px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
-    .badge.created {
-      background: #f0f0ff;
-      color: #6c63ff;
-    }
-
-    .badge.due {
-      background: #fff3e0;
-      color: #e67e22;
-    }
-
-    .badge.due.overdue {
-      background: #fdecea;
-      color: #e74c3c;
-    }
-
-    .badge.due.soon {
-      background: #fff8e1;
-      color: #f39c12;
-    }
+    .btn-save   { background: #6c63ff; color: #fff;    padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .btn-save:hover { background: #574fd6; }
+    .btn-cancel { background: #eee;     color: #555;   padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .btn-cancel:hover { background: #ddd; }
 
     .todo-item button.delete-btn {
       background: none;
@@ -273,21 +403,6 @@
     }
 
     .todo-item button.delete-btn:hover { color: #e74c3c; }
-
-    .btn-save { background: #6c63ff; color: #fff; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-    .btn-save:hover { background: #574fd6; }
-    .btn-cancel { background: #eee; color: #555; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-    .btn-cancel:hover { background: #ddd; }
-    .btn-clear { background: #fdecea; color: #e74c3c; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-    .btn-clear:hover { background: #f5c6c2; }
-
-    .badge.add-due {
-      background: #f0f0ff;
-      color: #6c63ff;
-      cursor: pointer;
-      border: 1px dashed #6c63ff;
-    }
-    .badge.add-due:hover { background: #e0deff; }
 
     .footer {
       margin-top: 16px;
@@ -314,143 +429,268 @@
       padding: 32px 0;
       font-size: 0.95rem;
     }
+
+    .loading {
+      text-align: center;
+      color: #bbb;
+      padding: 40px 0;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>My Todos</h1>
 
-    <div class="input-group">
-      <div class="input-row">
-        <input type="text" id="todo-input" placeholder="Add a new task…" />
-        <button class="add-btn" onclick="addTodo()">Add</button>
+    <!-- Auth Screen -->
+    <div id="auth-screen">
+      <div class="auth-card">
+        <h1>My Todos</h1>
+        <p class="subtitle">Sign in to access your tasks from anywhere</p>
+
+        <input type="email"    id="auth-email"    placeholder="Email address" />
+        <input type="password" id="auth-password" placeholder="Password" />
+
+        <div class="auth-btns">
+          <button class="btn-primary"   id="btn-login">Sign In</button>
+          <button class="btn-secondary" id="btn-register">Register</button>
+        </div>
+
+        <div class="divider">or</div>
+
+        <button class="btn-google" id="btn-google">
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.14 0 5.95 1.08 8.17 2.85l6.09-6.09C34.46 3.09 29.5 1 24 1 14.82 1 7.07 6.48 3.72 14.18l7.1 5.52C12.5 13.36 17.77 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.52 24.5c0-1.64-.15-3.22-.42-4.75H24v9h12.68c-.55 2.94-2.2 5.44-4.68 7.11l7.18 5.58C43.27 37.36 46.52 31.36 46.52 24.5z"/>
+            <path fill="#FBBC05" d="M10.82 28.3A14.56 14.56 0 0 1 9.5 24c0-1.49.26-2.93.72-4.3l-7.1-5.52A23.93 23.93 0 0 0 0 24c0 3.87.93 7.53 2.56 10.77l8.26-6.47z"/>
+            <path fill="#34A853" d="M24 47c5.5 0 10.12-1.82 13.48-4.94l-7.18-5.58C28.56 37.88 26.38 38.5 24 38.5c-6.23 0-11.5-3.86-13.18-9.2l-8.26 6.47C6.07 43.52 14.46 47 24 47z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="auth-error" id="auth-error"></div>
       </div>
-      <div class="input-row">
-        <input type="datetime-local" id="due-input" />
+    </div>
+
+    <!-- App Screen -->
+    <div id="app-screen" hidden>
+      <div class="app-header">
+        <h1>My Todos</h1>
+        <div class="user-info">
+          <img id="user-avatar" class="user-avatar" hidden src="" alt="" />
+          <span class="user-email" id="user-email"></span>
+          <button class="btn-signout" id="btn-signout">Sign out</button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-row">
+          <input type="text" id="todo-input" placeholder="Add a new task…" />
+          <button class="add-btn" id="btn-add">Add</button>
+        </div>
+        <div class="input-row">
+          <input type="datetime-local" id="due-input" />
+        </div>
+      </div>
+
+      <div class="filters">
+        <button id="filter-all"    class="active">All</button>
+        <button id="filter-active">Active</button>
+        <button id="filter-done">Done</button>
+      </div>
+
+      <ul class="todo-list" id="todo-list">
+        <li class="loading">Loading tasks…</li>
+      </ul>
+
+      <div class="footer">
+        <span id="count-label"></span>
+        <button id="btn-clear-done">Clear done</button>
       </div>
     </div>
 
-    <div class="filters">
-      <button onclick="setFilter('all')" id="filter-all" class="active">All</button>
-      <button onclick="setFilter('active')" id="filter-active">Active</button>
-      <button onclick="setFilter('done')" id="filter-done">Done</button>
-    </div>
-
-    <ul class="todo-list" id="todo-list"></ul>
-
-    <div class="footer">
-      <span id="count-label"></span>
-      <button onclick="clearDone()">Clear done</button>
-    </div>
   </div>
 
-  <script>
-    let todos = JSON.parse(localStorage.getItem('todos') || '[]');
-    let filter = 'all';
-    let editingId = null;
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+    import {
+      getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+      signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged
+    } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+    import {
+      getFirestore, collection, addDoc, updateDoc, deleteDoc,
+      doc, onSnapshot, query, orderBy, serverTimestamp
+    } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-    const input = document.getElementById('todo-input');
-    const dueInput = document.getElementById('due-input');
+    const firebaseConfig = {
+      apiKey: "AIzaSyBpAHHMuvdpabpqY1RUt3vM5bVMAho-IRE",
+      authDomain: "todo-web-5198f.firebaseapp.com",
+      projectId: "todo-web-5198f",
+      storageBucket: "todo-web-5198f.firebasestorage.app",
+      messagingSenderId: "999947428158",
+      appId: "1:999947428158:web:ee3cf1476b5ffb80288c6f"
+    };
 
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
+    const app            = initializeApp(firebaseConfig);
+    const auth           = getAuth(app);
+    const db             = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
 
-    function save() {
-      localStorage.setItem('todos', JSON.stringify(todos));
-    }
+    let todos           = [];
+    let filter          = 'all';
+    let editingId       = null;
+    let unsubscribeFn   = null;
 
-    function addTodo() {
-      const text = input.value.trim();
-      if (!text) return;
-      todos.unshift({
-        id: Date.now(),
-        text,
-        done: false,
-        createdAt: new Date().toISOString(),
-        dueAt: dueInput.value ? new Date(dueInput.value).toISOString() : null
-      });
-      input.value = '';
-      dueInput.value = '';
-      save();
-      render();
-    }
+    // ── Helpers ──────────────────────────────────────────────
 
-    function toggle(id) {
-      const t = todos.find(t => t.id === id);
-      if (t) { t.done = !t.done; if (t.done && editingId === id) editingId = null; }
-      save();
-      render();
-    }
-
-    function startEdit(id) {
-      editingId = id;
-      render();
-      const el = document.getElementById('ep-text-' + id);
-      if (el) { el.focus(); el.select(); }
-    }
-
-    function saveEdit(id) {
-      const textEl = document.getElementById('ep-text-' + id);
-      const dueEl  = document.getElementById('ep-due-'  + id);
-      const t = todos.find(t => t.id === id);
-      if (t) {
-        if (textEl && textEl.value.trim()) t.text = textEl.value.trim();
-        if (dueEl) t.dueAt = dueEl.value ? new Date(dueEl.value).toISOString() : null;
-      }
-      editingId = null;
-      save();
-      render();
-    }
-
-    function cancelEdit() {
-      editingId = null;
-      render();
-    }
-
-    function remove(id) {
-      todos = todos.filter(t => t.id !== id);
-      if (editingId === id) editingId = null;
-      save();
-      render();
-    }
-
-    function clearDone() {
-      todos = todos.filter(t => !t.done);
-      save();
-      render();
-    }
-
-    function setFilter(f) {
-      filter = f;
-      ['all', 'active', 'done'].forEach(name => {
-        document.getElementById('filter-' + name).classList.toggle('active', name === f);
-      });
-      render();
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
     function toLocalDatetimeValue(iso) {
       const d = new Date(iso);
-      const pad = n => String(n).padStart(2, '0');
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      const p = n => String(n).padStart(2,'0');
+      return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
     }
 
-    function formatDate(iso) {
-      const d = new Date(iso);
-      return d.toLocaleString(undefined, {
-        month: 'short', day: 'numeric', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
+    function formatDate(value) {
+      if (!value) return '';
+      const iso = value?.toDate ? value.toDate().toISOString() : value;
+      return new Date(iso).toLocaleString(undefined, {
+        month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'
       });
     }
 
     function dueStatus(iso) {
-      if (!iso) return null;
       const diff = new Date(iso).getTime() - Date.now();
-      if (diff < 0) return 'overdue';
+      if (diff < 0)       return 'overdue';
       if (diff < 3600000) return 'soon';
       return 'upcoming';
     }
 
+    function todosCol(uid) {
+      return collection(db, 'users', uid, 'todos');
+    }
+
+    function showError(msg) {
+      document.getElementById('auth-error').textContent = msg;
+    }
+
+    // ── Auth ─────────────────────────────────────────────────
+
+    document.getElementById('btn-login').onclick = async () => {
+      showError('');
+      const email    = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+      try { await signInWithEmailAndPassword(auth, email, password); }
+      catch(e) { showError(e.message); }
+    };
+
+    document.getElementById('btn-register').onclick = async () => {
+      showError('');
+      const email    = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+      try { await createUserWithEmailAndPassword(auth, email, password); }
+      catch(e) { showError(e.message); }
+    };
+
+    document.getElementById('btn-google').onclick = async () => {
+      showError('');
+      try { await signInWithPopup(auth, googleProvider); }
+      catch(e) { showError(e.message); }
+    };
+
+    document.getElementById('btn-signout').onclick = () => signOut(auth);
+
+    document.getElementById('auth-password').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('btn-login').click();
+    });
+
+    // ── Firestore operations ──────────────────────────────────
+
+    document.getElementById('btn-add').onclick = addTodo;
+
+    document.getElementById('todo-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTodo();
+    });
+
+    async function addTodo() {
+      const textEl = document.getElementById('todo-input');
+      const dueEl  = document.getElementById('due-input');
+      const text   = textEl.value.trim();
+      if (!text) return;
+      const uid = auth.currentUser?.uid;
+      if (!uid) return;
+      await addDoc(todosCol(uid), {
+        text,
+        done: false,
+        createdAt: serverTimestamp(),
+        dueAt: dueEl.value ? new Date(dueEl.value).toISOString() : null
+      });
+      textEl.value = '';
+      dueEl.value  = '';
+    }
+
+    window._toggle = async id => {
+      const t = todos.find(t => t.id === id);
+      if (!t) return;
+      const uid = auth.currentUser?.uid;
+      await updateDoc(doc(db, 'users', uid, 'todos', id), { done: !t.done });
+      if (editingId === id) { editingId = null; render(); }
+    };
+
+    window._startEdit = id => {
+      editingId = id;
+      render();
+      const el = document.getElementById('ep-text-' + id);
+      if (el) { el.focus(); el.select(); }
+    };
+
+    window._saveEdit = async id => {
+      const textEl = document.getElementById('ep-text-' + id);
+      const dueEl  = document.getElementById('ep-due-'  + id);
+      const uid    = auth.currentUser?.uid;
+      if (!uid) return;
+      const updates = {};
+      if (textEl?.value.trim()) updates.text  = textEl.value.trim();
+      if (dueEl)                updates.dueAt = dueEl.value ? new Date(dueEl.value).toISOString() : null;
+      await updateDoc(doc(db, 'users', uid, 'todos', id), updates);
+      editingId = null;
+      render();
+    };
+
+    window._cancelEdit = () => { editingId = null; render(); };
+
+    window._remove = async id => {
+      const uid = auth.currentUser?.uid;
+      if (!uid) return;
+      if (editingId === id) editingId = null;
+      await deleteDoc(doc(db, 'users', uid, 'todos', id));
+    };
+
+    document.getElementById('btn-clear-done').onclick = async () => {
+      const uid = auth.currentUser?.uid;
+      if (!uid) return;
+      await Promise.all(
+        todos.filter(t => t.done).map(t => deleteDoc(doc(db, 'users', uid, 'todos', t.id)))
+      );
+    };
+
+    ['all','active','done'].forEach(f => {
+      document.getElementById('filter-' + f).onclick = () => {
+        filter = f;
+        ['all','active','done'].forEach(n =>
+          document.getElementById('filter-' + n).classList.toggle('active', n === f)
+        );
+        render();
+      };
+    });
+
+    // ── Render ───────────────────────────────────────────────
+
     function render() {
       const list = document.getElementById('todo-list');
+      if (!list) return;
+
       const visible = todos.filter(t =>
         filter === 'all' ? true : filter === 'active' ? !t.done : t.done
       );
@@ -459,23 +699,24 @@
         list.innerHTML = '<li class="empty">No tasks here.</li>';
       } else {
         list.innerHTML = visible.map(t => {
-          const status     = t.dueAt ? dueStatus(t.dueAt) : null;
-          const isOverdue  = !t.done && status === 'overdue';
-          const dueCls     = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
-          const dueIcon    = status === 'overdue' ? '⚠️' : status === 'soon' ? '⏰' : '🕐';
-          const isEditing  = editingId === t.id;
-          const dueVal     = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
+          const status    = t.dueAt ? dueStatus(t.dueAt) : null;
+          const isOverdue = !t.done && status === 'overdue';
+          const dueCls    = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
+          const dueIcon   = status === 'overdue' ? '⚠️' : status === 'soon' ? '⏰' : '🕐';
+          const isEditing = editingId === t.id;
+          const dueVal    = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
+          const created   = t.createdAt ? formatDate(t.createdAt) : '';
 
           return `
             <li class="todo-item ${t.done ? 'done' : ''} ${isOverdue ? 'overdue' : ''}">
-              <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})" />
+              <input type="checkbox" ${t.done ? 'checked' : ''} onchange="_toggle('${t.id}')" />
               <div class="todo-body">
                 <div class="todo-title-row">
                   <span class="text">${escapeHtml(t.text)}</span>
-                  ${!t.done ? `<button class="btn-edit-text" onclick="startEdit(${t.id})" title="Edit task">✏️</button>` : ''}
+                  ${!t.done ? `<button class="btn-edit-text" onclick="_startEdit('${t.id}')" title="Edit">✏️</button>` : ''}
                 </div>
                 <div class="todo-meta">
-                  ${t.createdAt ? `<span class="badge created">Created: ${formatDate(t.createdAt)}</span>` : ''}
+                  ${created ? `<span class="badge created">Created: ${created}</span>` : ''}
                   ${t.dueAt ? `<span class="badge due ${dueCls}">${dueIcon} ${formatDate(t.dueAt)}</span>` : ''}
                 </div>
                 ${isEditing ? `
@@ -483,21 +724,20 @@
                     <div>
                       <label>Task</label>
                       <input type="text" id="ep-text-${t.id}" value="${escapeHtml(t.text)}"
-                        onkeydown="if(event.key==='Enter')saveEdit(${t.id});if(event.key==='Escape')cancelEdit();" />
+                        onkeydown="if(event.key==='Enter')_saveEdit('${t.id}');if(event.key==='Escape')_cancelEdit();" />
                     </div>
                     <div>
                       <label>Due date &amp; time</label>
                       <input type="datetime-local" id="ep-due-${t.id}" value="${dueVal}" />
                     </div>
                     <div class="edit-panel-actions">
-                      <button class="btn-save"   onclick="saveEdit(${t.id})">Save</button>
-                      <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+                      <button class="btn-save"   onclick="_saveEdit('${t.id}')">Save</button>
+                      <button class="btn-cancel" onclick="_cancelEdit()">Cancel</button>
                     </div>
                   </div>` : ''}
               </div>
-              <button class="delete-btn" onclick="remove(${t.id})" title="Delete">&#x2715;</button>
-            </li>
-          `;
+              <button class="delete-btn" onclick="_remove('${t.id}')" title="Delete">&#x2715;</button>
+            </li>`;
         }).join('');
       }
 
@@ -506,11 +746,31 @@
         `${active} task${active !== 1 ? 's' : ''} left`;
     }
 
-    function escapeHtml(str) {
-      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
+    // ── Auth state ───────────────────────────────────────────
 
-    render();
+    onAuthStateChanged(auth, user => {
+      document.getElementById('auth-screen').hidden = !!user;
+      document.getElementById('app-screen').hidden  = !user;
+
+      if (user) {
+        document.getElementById('user-email').textContent = user.displayName || user.email;
+        const avatar = document.getElementById('user-avatar');
+        if (user.photoURL) { avatar.src = user.photoURL; avatar.hidden = false; }
+        else { avatar.hidden = true; }
+
+        if (unsubscribeFn) unsubscribeFn();
+        const q = query(todosCol(user.uid), orderBy('createdAt', 'desc'));
+        unsubscribeFn = onSnapshot(q, snap => {
+          todos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          render();
+        });
+      } else {
+        if (unsubscribeFn) { unsubscribeFn(); unsubscribeFn = null; }
+        todos     = [];
+        editingId = null;
+      }
+    });
+
     setInterval(render, 60000);
   </script>
 </body>

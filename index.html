@@ -148,30 +148,81 @@
       color: #333;
       word-break: break-word;
       display: block;
-      cursor: pointer;
     }
-
-    .todo-item .text:hover { color: #6c63ff; }
 
     .todo-item.done .text {
       text-decoration: line-through;
       color: #aaa;
-      cursor: default;
     }
 
-    .edit-text-row {
+    .todo-title-row {
       display: flex;
+      align-items: center;
       gap: 6px;
-      margin-bottom: 4px;
     }
 
-    .edit-text-row input[type="text"] {
-      flex: 1;
-      padding: 6px 10px;
-      border: 2px solid #6c63ff;
+    .btn-edit-text {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #bbb;
+      font-size: 0.95rem;
+      padding: 0 2px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .btn-edit-text:hover { color: #6c63ff; }
+
+    .edit-panel {
+      margin-top: 10px;
+      background: #f7f7ff;
+      border: 1.5px solid #d0cbff;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .edit-panel label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .edit-panel input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #d0cbff;
       border-radius: 8px;
       font-size: 1rem;
       outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .edit-panel input[type="text"]:focus { border-color: #6c63ff; }
+
+    .edit-panel input[type="datetime-local"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #d0cbff;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      color: #555;
+      transition: border-color 0.2s;
+    }
+
+    .edit-panel input[type="datetime-local"]:focus { border-color: #6c63ff; }
+
+    .edit-panel-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .todo-meta {
@@ -223,41 +274,13 @@
 
     .todo-item button.delete-btn:hover { color: #e74c3c; }
 
-    .edit-due-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .edit-due-row input[type="datetime-local"] {
-      flex: 1;
-      padding: 5px 10px;
-      border: 2px solid #6c63ff;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      outline: none;
-      color: #333;
-    }
-
-    .edit-due-row button {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .btn-save { background: #6c63ff; color: #fff; }
+    .btn-save { background: #6c63ff; color: #fff; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     .btn-save:hover { background: #574fd6; }
-    .btn-cancel { background: #eee; color: #555; }
+    .btn-cancel { background: #eee; color: #555; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     .btn-cancel:hover { background: #ddd; }
-    .btn-clear { background: #fdecea; color: #e74c3c; }
+    .btn-clear { background: #fdecea; color: #e74c3c; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     .btn-clear:hover { background: #f5c6c2; }
 
-    .badge.due { cursor: pointer; }
-    .badge.due:hover { opacity: 0.8; }
     .badge.add-due {
       background: #f0f0ff;
       color: #6c63ff;
@@ -324,8 +347,7 @@
   <script>
     let todos = JSON.parse(localStorage.getItem('todos') || '[]');
     let filter = 'all';
-    let editingDueId = null;
-    let editingTextId = null;
+    let editingId = null;
 
     const input = document.getElementById('todo-input');
     const dueInput = document.getElementById('due-input');
@@ -354,66 +376,39 @@
 
     function toggle(id) {
       const t = todos.find(t => t.id === id);
-      if (t) t.done = !t.done;
+      if (t) { t.done = !t.done; if (t.done && editingId === id) editingId = null; }
       save();
       render();
     }
 
-    function startEditText(id) {
-      editingTextId = id;
-      editingDueId = null;
+    function startEdit(id) {
+      editingId = id;
       render();
-      const el = document.getElementById('edit-text-' + id);
+      const el = document.getElementById('ep-text-' + id);
       if (el) { el.focus(); el.select(); }
     }
 
-    function saveText(id) {
-      const el = document.getElementById('edit-text-' + id);
+    function saveEdit(id) {
+      const textEl = document.getElementById('ep-text-' + id);
+      const dueEl  = document.getElementById('ep-due-'  + id);
       const t = todos.find(t => t.id === id);
-      if (t && el && el.value.trim()) t.text = el.value.trim();
-      editingTextId = null;
-      save();
-      render();
-    }
-
-    function cancelEditText() {
-      editingTextId = null;
-      render();
-    }
-
-    function startEditDue(id) {
-      editingDueId = id;
-      render();
-      const el = document.getElementById('edit-due-' + id);
-      if (el) el.focus();
-    }
-
-    function saveDue(id) {
-      const el = document.getElementById('edit-due-' + id);
-      const t = todos.find(t => t.id === id);
-      if (t && el) {
-        t.dueAt = el.value ? new Date(el.value).toISOString() : null;
+      if (t) {
+        if (textEl && textEl.value.trim()) t.text = textEl.value.trim();
+        if (dueEl) t.dueAt = dueEl.value ? new Date(dueEl.value).toISOString() : null;
       }
-      editingDueId = null;
+      editingId = null;
       save();
       render();
     }
 
-    function clearDue(id) {
-      const t = todos.find(t => t.id === id);
-      if (t) t.dueAt = null;
-      editingDueId = null;
-      save();
-      render();
-    }
-
-    function cancelEditDue() {
-      editingDueId = null;
+    function cancelEdit() {
+      editingId = null;
       render();
     }
 
     function remove(id) {
       todos = todos.filter(t => t.id !== id);
+      if (editingId === id) editingId = null;
       save();
       render();
     }
@@ -448,62 +443,56 @@
 
     function dueStatus(iso) {
       if (!iso) return null;
-      const now = Date.now();
-      const due = new Date(iso).getTime();
-      const diff = due - now;
+      const diff = new Date(iso).getTime() - Date.now();
       if (diff < 0) return 'overdue';
-      if (diff < 60 * 60 * 1000) return 'soon';
+      if (diff < 3600000) return 'soon';
       return 'upcoming';
     }
 
     function render() {
       const list = document.getElementById('todo-list');
       const visible = todos.filter(t =>
-        filter === 'all' ? true :
-        filter === 'active' ? !t.done :
-        t.done
+        filter === 'all' ? true : filter === 'active' ? !t.done : t.done
       );
 
       if (visible.length === 0) {
         list.innerHTML = '<li class="empty">No tasks here.</li>';
       } else {
         list.innerHTML = visible.map(t => {
-          const status = t.dueAt ? dueStatus(t.dueAt) : null;
-          const isOverdue = !t.done && status === 'overdue';
-          const dueBadgeClass = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
-          const dueLabel = status === 'overdue' ? '&#9888; Overdue' : status === 'soon' ? '&#9200; Due soon' : '&#128337;';
-          const isEditingDue = editingDueId === t.id;
-          const isEditingText = editingTextId === t.id;
-          const currentVal = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
+          const status     = t.dueAt ? dueStatus(t.dueAt) : null;
+          const isOverdue  = !t.done && status === 'overdue';
+          const dueCls     = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
+          const dueIcon    = status === 'overdue' ? '⚠️' : status === 'soon' ? '⏰' : '🕐';
+          const isEditing  = editingId === t.id;
+          const dueVal     = t.dueAt ? toLocalDatetimeValue(t.dueAt) : '';
 
           return `
             <li class="todo-item ${t.done ? 'done' : ''} ${isOverdue ? 'overdue' : ''}">
               <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})" />
               <div class="todo-body">
-                ${isEditingText ? `
-                  <div class="edit-text-row">
-                    <input type="text" id="edit-text-${t.id}" value="${escapeHtml(t.text)}"
-                      onkeydown="if(event.key==='Enter')saveText(${t.id});if(event.key==='Escape')cancelEditText();" />
-                    <button class="btn-save" onclick="saveText(${t.id})">Save</button>
-                    <button class="btn-cancel" onclick="cancelEditText()">Cancel</button>
-                  </div>` :
-                  `<span class="text" onclick="${t.done ? '' : `startEditText(${t.id})`}" title="${t.done ? '' : 'Click to edit'}">${escapeHtml(t.text)}</span>`
-                }
+                <div class="todo-title-row">
+                  <span class="text">${escapeHtml(t.text)}</span>
+                  ${!t.done ? `<button class="btn-edit-text" onclick="startEdit(${t.id})" title="Edit task">✏️</button>` : ''}
+                </div>
                 <div class="todo-meta">
                   ${t.createdAt ? `<span class="badge created">Created: ${formatDate(t.createdAt)}</span>` : ''}
-                  ${t.dueAt && !isEditingDue
-                    ? `<span class="badge due ${dueBadgeClass}" onclick="startEditDue(${t.id})" title="Click to edit">${dueLabel} ${formatDate(t.dueAt)} &#9998;</span>`
-                    : ''}
-                  ${!t.dueAt && !isEditingDue
-                    ? `<span class="badge add-due" onclick="startEditDue(${t.id})">+ Add due date</span>`
-                    : ''}
+                  ${t.dueAt ? `<span class="badge due ${dueCls}">${dueIcon} ${formatDate(t.dueAt)}</span>` : ''}
                 </div>
-                ${isEditingDue ? `
-                  <div class="edit-due-row">
-                    <input type="datetime-local" id="edit-due-${t.id}" value="${currentVal}" />
-                    <button class="btn-save" onclick="saveDue(${t.id})">Save</button>
-                    <button class="btn-clear" onclick="clearDue(${t.id})">Clear</button>
-                    <button class="btn-cancel" onclick="cancelEditDue()">Cancel</button>
+                ${isEditing ? `
+                  <div class="edit-panel">
+                    <div>
+                      <label>Task</label>
+                      <input type="text" id="ep-text-${t.id}" value="${escapeHtml(t.text)}"
+                        onkeydown="if(event.key==='Enter')saveEdit(${t.id});if(event.key==='Escape')cancelEdit();" />
+                    </div>
+                    <div>
+                      <label>Due date &amp; time</label>
+                      <input type="datetime-local" id="ep-due-${t.id}" value="${dueVal}" />
+                    </div>
+                    <div class="edit-panel-actions">
+                      <button class="btn-save"   onclick="saveEdit(${t.id})">Save</button>
+                      <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+                    </div>
                   </div>` : ''}
               </div>
               <button class="delete-btn" onclick="remove(${t.id})" title="Delete">&#x2715;</button>

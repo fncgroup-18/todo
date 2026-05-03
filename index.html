@@ -16,426 +16,218 @@
       padding: 48px 16px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 520px;
-    }
+    .container { width: 100%; max-width: 520px; }
 
-    /* ── Auth Screen ── */
+    /* ── Auth ── */
     .auth-card {
       background: #fff;
       border-radius: 18px;
       padding: 36px 32px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     }
-
-    .auth-card h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-
-    .auth-card p.subtitle {
-      text-align: center;
-      color: #999;
-      font-size: 0.9rem;
-      margin-bottom: 28px;
-    }
-
+    .auth-card h1 { font-size: 1.8rem; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; text-align: center; }
+    .auth-card p.subtitle { text-align: center; color: #999; font-size: 0.9rem; margin-bottom: 28px; }
     .auth-card input[type="email"],
     .auth-card input[type="password"] {
-      width: 100%;
-      padding: 12px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 1rem;
-      outline: none;
-      margin-bottom: 12px;
-      transition: border-color 0.2s;
+      width: 100%; padding: 12px 14px; border: 2px solid #e0e0e0; border-radius: 10px;
+      font-size: 1rem; outline: none; margin-bottom: 12px; transition: border-color 0.2s;
     }
-
     .auth-card input:focus { border-color: #6c63ff; }
-
-    .auth-btns {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
+    .auth-btns { display: flex; gap: 8px; margin-bottom: 12px; }
     .btn-primary {
-      flex: 1;
-      padding: 12px;
-      background: #6c63ff;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
+      flex: 1; padding: 12px; background: #6c63ff; color: #fff; border: none;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
     }
-
     .btn-primary:hover { background: #574fd6; }
-
     .btn-secondary {
-      flex: 1;
-      padding: 12px;
-      background: #f0f0ff;
-      color: #6c63ff;
-      border: 2px solid #d0cbff;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+      flex: 1; padding: 12px; background: #f0f0ff; color: #6c63ff; border: 2px solid #d0cbff;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
-
     .btn-secondary:hover { background: #e0deff; }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 16px 0;
-      color: #ccc;
-      font-size: 0.85rem;
-    }
-
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #e8e8e8;
-    }
-
+    .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; color: #ccc; font-size: 0.85rem; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e8e8e8; }
     .btn-google {
-      width: 100%;
-      padding: 12px;
-      background: #fff;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: border-color 0.2s, background 0.2s;
-      color: #333;
+      width: 100%; padding: 12px; background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 10px; transition: border-color 0.2s, background 0.2s; color: #333;
     }
-
     .btn-google:hover { border-color: #6c63ff; background: #fafafa; }
+    .auth-error { color: #e74c3c; font-size: 0.85rem; margin-top: 10px; min-height: 20px; text-align: center; }
 
-    .auth-error {
-      color: #e74c3c;
-      font-size: 0.85rem;
-      margin-top: 10px;
-      min-height: 20px;
-      text-align: center;
-    }
-
-    /* ── App Screen ── */
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-
-    .app-header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .user-email {
-      font-size: 0.85rem;
-      color: #666;
-      max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
+    /* ── App header ── */
+    .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .app-header h1 { font-size: 1.8rem; font-weight: 700; color: #1a1a2e; }
+    .user-info { display: flex; align-items: center; gap: 8px; }
+    .user-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .user-email { font-size: 0.85rem; color: #666; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .btn-signout {
-      padding: 6px 12px;
-      background: none;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      color: #999;
-      transition: all 0.2s;
+      padding: 6px 12px; background: none; border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 0.8rem; cursor: pointer; color: #999; transition: all 0.2s;
     }
-
     .btn-signout:hover { border-color: #e74c3c; color: #e74c3c; }
 
+    /* ── Input group ── */
     .input-group {
-      background: #fff;
-      border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-      margin-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      background: #fff; border-radius: 14px; padding: 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 20px;
+      display: flex; flex-direction: column; gap: 10px;
     }
-
     .input-row { display: flex; gap: 8px; }
 
     input[type="text"] {
-      flex: 1;
-      padding: 11px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
+      flex: 1; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 10px;
+      font-size: 1rem; outline: none; transition: border-color 0.2s;
     }
-
     input[type="text"]:focus { border-color: #6c63ff; }
 
     input[type="datetime-local"] {
-      flex: 1;
-      padding: 11px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      outline: none;
-      color: #555;
-      transition: border-color 0.2s;
+      flex: 1; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 10px;
+      font-size: 0.9rem; outline: none; color: #555; transition: border-color 0.2s;
     }
-
     input[type="datetime-local"]:focus { border-color: #6c63ff; }
 
-    button.add-btn {
-      padding: 11px 20px;
-      background: #6c63ff;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      white-space: nowrap;
+    select.recur-select {
+      flex: 1; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 10px;
+      font-size: 0.9rem; outline: none; color: #555; background: #fff;
+      cursor: pointer; transition: border-color 0.2s; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 36px;
     }
+    select.recur-select:focus { border-color: #6c63ff; }
 
+    button.add-btn {
+      padding: 11px 20px; background: #6c63ff; color: #fff; border: none;
+      border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; white-space: nowrap;
+    }
     button.add-btn:hover { background: #574fd6; }
 
-    .filters {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
+    /* ── Filters ── */
+    .filters { display: flex; gap: 8px; margin-bottom: 16px; }
     .filters button {
-      flex: 1;
-      padding: 8px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      background: #fff;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: all 0.2s;
+      flex: 1; padding: 8px; border: 2px solid #e0e0e0; border-radius: 8px;
+      background: #fff; font-size: 0.875rem; cursor: pointer; transition: all 0.2s;
     }
+    .filters button.active { border-color: #6c63ff; background: #6c63ff; color: #fff; }
 
-    .filters button.active {
-      border-color: #6c63ff;
-      background: #6c63ff;
-      color: #fff;
-    }
-
-    .todo-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* ── Todo list ── */
+    .todo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
     .todo-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: #fff;
-      padding: 14px 16px;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      transition: opacity 0.2s;
+      display: flex; align-items: flex-start; gap: 12px; background: #fff;
+      padding: 14px 16px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); transition: opacity 0.2s;
     }
-
     .todo-item.done { opacity: 0.5; }
     .todo-item.overdue { border-left: 3px solid #e74c3c; }
 
     .todo-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #6c63ff;
-      cursor: pointer;
-      flex-shrink: 0;
-      margin-top: 3px;
+      width: 18px; height: 18px; accent-color: #6c63ff; cursor: pointer; flex-shrink: 0; margin-top: 3px;
     }
-
     .todo-body { flex: 1; min-width: 0; }
+    .todo-title-row { display: flex; align-items: center; gap: 6px; }
 
-    .todo-title-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .todo-item .text {
-      font-size: 1rem;
-      color: #333;
-      word-break: break-word;
-      display: block;
-    }
-
+    .todo-item .text { font-size: 1rem; color: #333; word-break: break-word; display: block; }
     .todo-item.done .text { text-decoration: line-through; color: #aaa; }
 
     .btn-edit-text {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #bbb;
-      font-size: 0.95rem;
-      padding: 0 2px;
-      line-height: 1;
-      flex-shrink: 0;
-      transition: color 0.2s;
+      background: none; border: none; cursor: pointer; color: #bbb; font-size: 0.95rem;
+      padding: 0 2px; line-height: 1; flex-shrink: 0; transition: color 0.2s;
     }
-
     .btn-edit-text:hover { color: #6c63ff; }
 
-    .todo-meta {
-      margin-top: 5px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
+    .todo-meta { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 
-    .badge {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
-    .badge.created { background: #f0f0ff; color: #6c63ff; }
-    .badge.due     { background: #fff3e0; color: #e67e22; }
+    .badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+    .badge.created  { background: #f0f0ff; color: #6c63ff; }
+    .badge.due      { background: #fff3e0; color: #e67e22; }
     .badge.due.overdue { background: #fdecea; color: #e74c3c; }
     .badge.due.soon    { background: #fff8e1; color: #f39c12; }
+    .badge.recur    { background: #e8f8f0; color: #27ae60; }
 
+    /* ── Edit panel ── */
     .edit-panel {
-      margin-top: 10px;
-      background: #f7f7ff;
-      border: 1.5px solid #d0cbff;
-      border-radius: 10px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-top: 10px; background: #f7f7ff; border: 1.5px solid #d0cbff;
+      border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px;
     }
-
-    .edit-panel label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .edit-panel input[type="text"] {
-      width: 100%;
-      padding: 8px 12px;
-      border: 2px solid #d0cbff;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
+    .edit-panel label { font-size: 0.78rem; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+    .edit-panel input[type="text"] { width: 100%; padding: 8px 12px; border: 2px solid #d0cbff; border-radius: 8px; font-size: 1rem; }
     .edit-panel input[type="text"]:focus { border-color: #6c63ff; }
-
-    .edit-panel input[type="datetime-local"] {
-      width: 100%;
-      padding: 8px 12px;
-      border: 2px solid #d0cbff;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
+    .edit-panel input[type="datetime-local"] { width: 100%; padding: 8px 12px; border: 2px solid #d0cbff; border-radius: 8px; font-size: 0.9rem; color: #555; }
     .edit-panel input[type="datetime-local"]:focus { border-color: #6c63ff; }
-
+    .edit-panel select {
+      width: 100%; padding: 8px 12px; border: 2px solid #d0cbff; border-radius: 8px;
+      font-size: 0.9rem; color: #555; background: #fff; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+    }
+    .edit-panel select:focus { border-color: #6c63ff; outline: none; }
     .edit-panel-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 
-    .btn-save   { background: #6c63ff; color: #fff;    padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .btn-save   { background: #6c63ff; color: #fff; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     .btn-save:hover { background: #574fd6; }
-    .btn-cancel { background: #eee;     color: #555;   padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .btn-cancel { background: #eee; color: #555; padding: 6px 14px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
     .btn-cancel:hover { background: #ddd; }
 
     .todo-item button.delete-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #ccc;
-      font-size: 1.2rem;
-      line-height: 1;
-      transition: color 0.2s;
-      flex-shrink: 0;
-      margin-top: 2px;
+      background: none; border: none; cursor: pointer; color: #ccc;
+      font-size: 1.2rem; line-height: 1; transition: color 0.2s; flex-shrink: 0; margin-top: 2px;
     }
-
     .todo-item button.delete-btn:hover { color: #e74c3c; }
 
-    .footer {
-      margin-top: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: #999;
-    }
-
-    .footer button {
-      background: none;
-      border: none;
-      color: #e74c3c;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
+    /* ── Footer ── */
+    .footer { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #999; }
+    .footer button { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.85rem; }
     .footer button:hover { text-decoration: underline; }
 
-    .empty {
-      text-align: center;
-      color: #bbb;
-      padding: 32px 0;
-      font-size: 0.95rem;
-    }
+    .empty  { text-align: center; color: #bbb; padding: 32px 0; font-size: 0.95rem; }
+    .loading { text-align: center; color: #bbb; padding: 40px 0; font-size: 1rem; }
 
-    .loading {
-      text-align: center;
-      color: #bbb;
-      padding: 40px 0;
-      font-size: 1rem;
+    /* ── Trends ── */
+    .trends-section {
+      margin-top: 32px; background: #fff; border-radius: 14px; padding: 20px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
     }
+    .trends-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .trends-title  { font-size: 1rem; font-weight: 700; color: #1a1a2e; }
+    .trends-toggle { display: flex; gap: 6px; }
+    .trends-toggle button {
+      padding: 5px 12px; border: 2px solid #e0e0e0; border-radius: 8px;
+      background: #fff; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; color: #666;
+    }
+    .trends-toggle button.active { border-color: #6c63ff; background: #6c63ff; color: #fff; }
+
+    /* Bar chart (7 days) */
+    .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; }
+    .bar-wrap  { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+    .bar {
+      width: 100%; border-radius: 6px 6px 0 0; transition: height 0.4s ease;
+      min-height: 4px; position: relative; cursor: default;
+    }
+    .bar:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+      background: #333; color: #fff; font-size: 0.72rem; padding: 3px 7px;
+      border-radius: 6px; white-space: nowrap; pointer-events: none;
+    }
+    .bar-label { font-size: 0.7rem; color: #999; }
+
+    /* Heatmap (30 days) */
+    .heatmap { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
+    .heat-cell {
+      aspect-ratio: 1; border-radius: 4px; cursor: default; position: relative;
+    }
+    .heat-cell:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+      background: #333; color: #fff; font-size: 0.72rem; padding: 3px 7px;
+      border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 10;
+    }
+    .trends-summary {
+      margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .trend-stat { font-size: 0.82rem; color: #666; }
+    .trend-stat strong { color: #1a1a2e; font-size: 1rem; }
   </style>
 </head>
 <body>
@@ -446,17 +238,13 @@
       <div class="auth-card">
         <h1>My Todos</h1>
         <p class="subtitle">Sign in to access your tasks from anywhere</p>
-
         <input type="email"    id="auth-email"    placeholder="Email address" />
         <input type="password" id="auth-password" placeholder="Password" />
-
         <div class="auth-btns">
           <button class="btn-primary"   id="btn-login">Sign In</button>
           <button class="btn-secondary" id="btn-register">Register</button>
         </div>
-
         <div class="divider">or</div>
-
         <button class="btn-google" id="btn-google">
           <svg width="18" height="18" viewBox="0 0 48 48">
             <path fill="#EA4335" d="M24 9.5c3.14 0 5.95 1.08 8.17 2.85l6.09-6.09C34.46 3.09 29.5 1 24 1 14.82 1 7.07 6.48 3.72 14.18l7.1 5.52C12.5 13.36 17.77 9.5 24 9.5z"/>
@@ -466,7 +254,6 @@
           </svg>
           Continue with Google
         </button>
-
         <div class="auth-error" id="auth-error"></div>
       </div>
     </div>
@@ -490,10 +277,20 @@
         <div class="input-row">
           <input type="datetime-local" id="due-input" />
         </div>
+        <div class="input-row">
+          <select id="recur-input" class="recur-select">
+            <option value="">🔁 No repeat</option>
+            <option value="daily">Every day</option>
+            <option value="weekday">Every weekday (Mon–Fri)</option>
+            <option value="weekly">Every week</option>
+            <option value="biweekly">Every 2 weeks</option>
+            <option value="monthly">Every month</option>
+          </select>
+        </div>
       </div>
 
       <div class="filters">
-        <button id="filter-all"    class="active">All</button>
+        <button id="filter-all" class="active">All</button>
         <button id="filter-active">Active</button>
         <button id="filter-done">Done</button>
       </div>
@@ -505,6 +302,19 @@
       <div class="footer">
         <span id="count-label"></span>
         <button id="btn-clear-done">Clear done</button>
+      </div>
+
+      <!-- Trends -->
+      <div class="trends-section" id="trends-section">
+        <div class="trends-header">
+          <span class="trends-title">📊 Productivity</span>
+          <div class="trends-toggle">
+            <button id="trend-btn-7"  class="active" onclick="_setTrendDays(7)">7 days</button>
+            <button id="trend-btn-30" onclick="_setTrendDays(30)">30 days</button>
+          </div>
+        </div>
+        <div id="trends-chart"></div>
+        <div class="trends-summary" id="trends-summary"></div>
       </div>
     </div>
 
@@ -535,61 +345,75 @@
     const db             = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
 
-    let todos           = [];
-    let filter          = 'all';
-    let editingId       = null;
-    let unsubscribeFn   = null;
+    let todos         = [];
+    let filter        = 'all';
+    let editingId     = null;
+    let trendDays     = 7;
+    let unsubscribeFn = null;
 
     // ── Helpers ──────────────────────────────────────────────
 
-    function escapeHtml(str) {
-      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
     function toLocalDatetimeValue(iso) {
-      const d = new Date(iso);
-      const p = n => String(n).padStart(2,'0');
+      const d = new Date(iso), p = n => String(n).padStart(2,'0');
       return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
     }
 
-    function formatDate(value) {
-      if (!value) return '';
-      const iso = value?.toDate ? value.toDate().toISOString() : value;
-      return new Date(iso).toLocaleString(undefined, {
-        month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'
-      });
+    function formatDate(v) {
+      if (!v) return '';
+      const iso = v?.toDate ? v.toDate().toISOString() : v;
+      return new Date(iso).toLocaleString(undefined, { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+
+    function dateKey(v) {
+      if (!v) return null;
+      const iso = v?.toDate ? v.toDate().toISOString() : v;
+      return iso.slice(0, 10);
     }
 
     function dueStatus(iso) {
       const diff = new Date(iso).getTime() - Date.now();
-      if (diff < 0)       return 'overdue';
-      if (diff < 3600000) return 'soon';
-      return 'upcoming';
+      return diff < 0 ? 'overdue' : diff < 3600000 ? 'soon' : 'upcoming';
     }
 
-    function todosCol(uid) {
-      return collection(db, 'users', uid, 'todos');
+    function todosCol(uid) { return collection(db, 'users', uid, 'todos'); }
+
+    const RECUR_LABELS = {
+      daily: 'Every day', weekday: 'Every weekday',
+      weekly: 'Every week', biweekly: 'Every 2 weeks', monthly: 'Every month'
+    };
+
+    function nextOccurrence(dueAt, recur) {
+      if (!dueAt || !recur) return null;
+      const d = new Date(dueAt);
+      if (recur === 'daily')    { d.setDate(d.getDate() + 1); }
+      if (recur === 'weekday')  { do { d.setDate(d.getDate() + 1); } while (d.getDay() === 0 || d.getDay() === 6); }
+      if (recur === 'weekly')   { d.setDate(d.getDate() + 7); }
+      if (recur === 'biweekly') { d.setDate(d.getDate() + 14); }
+      if (recur === 'monthly')  { d.setMonth(d.getMonth() + 1); }
+      return d.toISOString();
     }
 
-    function showError(msg) {
-      document.getElementById('auth-error').textContent = msg;
-    }
+    function showError(msg) { document.getElementById('auth-error').textContent = msg; }
 
     // ── Auth ─────────────────────────────────────────────────
 
     document.getElementById('btn-login').onclick = async () => {
       showError('');
-      const email    = document.getElementById('auth-email').value.trim();
-      const password = document.getElementById('auth-password').value;
-      try { await signInWithEmailAndPassword(auth, email, password); }
+      const email = document.getElementById('auth-email').value.trim();
+      const pass  = document.getElementById('auth-password').value;
+      try { await signInWithEmailAndPassword(auth, email, pass); }
       catch(e) { showError(e.message); }
     };
 
     document.getElementById('btn-register').onclick = async () => {
       showError('');
-      const email    = document.getElementById('auth-email').value.trim();
-      const password = document.getElementById('auth-password').value;
-      try { await createUserWithEmailAndPassword(auth, email, password); }
+      const email = document.getElementById('auth-email').value.trim();
+      const pass  = document.getElementById('auth-password').value;
+      try { await createUserWithEmailAndPassword(auth, email, pass); }
       catch(e) { showError(e.message); }
     };
 
@@ -600,62 +424,74 @@
     };
 
     document.getElementById('btn-signout').onclick = () => signOut(auth);
-
     document.getElementById('auth-password').addEventListener('keydown', e => {
       if (e.key === 'Enter') document.getElementById('btn-login').click();
     });
 
-    // ── Firestore operations ──────────────────────────────────
+    // ── Firestore ─────────────────────────────────────────────
 
     document.getElementById('btn-add').onclick = addTodo;
-
-    document.getElementById('todo-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') addTodo();
-    });
+    document.getElementById('todo-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
 
     async function addTodo() {
-      const textEl = document.getElementById('todo-input');
-      const dueEl  = document.getElementById('due-input');
-      const text   = textEl.value.trim();
+      const textEl  = document.getElementById('todo-input');
+      const dueEl   = document.getElementById('due-input');
+      const recurEl = document.getElementById('recur-input');
+      const text    = textEl.value.trim();
       if (!text) return;
       const uid = auth.currentUser?.uid;
       if (!uid) return;
-      await addDoc(todosCol(uid), {
-        text,
-        done: false,
-        createdAt: serverTimestamp(),
-        dueAt: dueEl.value ? new Date(dueEl.value).toISOString() : null
-      });
-      textEl.value = '';
-      dueEl.value  = '';
+      const recur = recurEl.value || null;
+      const dueAt = dueEl.value ? new Date(dueEl.value).toISOString() : null;
+      if (recur && !dueAt) { alert('Please set a due date/time for a recurring task.'); return; }
+      await addDoc(todosCol(uid), { text, done: false, createdAt: serverTimestamp(), dueAt, recur, completedAt: null });
+      textEl.value = ''; dueEl.value = ''; recurEl.value = '';
     }
 
     window._toggle = async id => {
       const t = todos.find(t => t.id === id);
       if (!t) return;
       const uid = auth.currentUser?.uid;
-      await updateDoc(doc(db, 'users', uid, 'todos', id), { done: !t.done });
+      if (!uid) return;
+      const nowDone = !t.done;
+
+      // Mark this task done / undone
+      await updateDoc(doc(db, 'users', uid, 'todos', id), {
+        done: nowDone,
+        completedAt: nowDone ? serverTimestamp() : null
+      });
+
+      // If completing a recurring task, create the next occurrence
+      if (nowDone && t.recur && t.dueAt) {
+        const nextDue = nextOccurrence(t.dueAt, t.recur);
+        if (nextDue) {
+          await addDoc(todosCol(uid), {
+            text: t.text, done: false, createdAt: serverTimestamp(),
+            dueAt: nextDue, recur: t.recur, completedAt: null
+          });
+        }
+      }
       if (editingId === id) { editingId = null; render(); }
     };
 
     window._startEdit = id => {
-      editingId = id;
-      render();
+      editingId = id; render();
       const el = document.getElementById('ep-text-' + id);
       if (el) { el.focus(); el.select(); }
     };
 
     window._saveEdit = async id => {
-      const textEl = document.getElementById('ep-text-' + id);
-      const dueEl  = document.getElementById('ep-due-'  + id);
-      const uid    = auth.currentUser?.uid;
+      const textEl  = document.getElementById('ep-text-'  + id);
+      const dueEl   = document.getElementById('ep-due-'   + id);
+      const recurEl = document.getElementById('ep-recur-' + id);
+      const uid = auth.currentUser?.uid;
       if (!uid) return;
       const updates = {};
       if (textEl?.value.trim()) updates.text  = textEl.value.trim();
-      if (dueEl)                updates.dueAt = dueEl.value ? new Date(dueEl.value).toISOString() : null;
+      if (dueEl)  updates.dueAt = dueEl.value  ? new Date(dueEl.value).toISOString() : null;
+      if (recurEl) updates.recur = recurEl.value || null;
       await updateDoc(doc(db, 'users', uid, 'todos', id), updates);
-      editingId = null;
-      render();
+      editingId = null; render();
     };
 
     window._cancelEdit = () => { editingId = null; render(); };
@@ -670,9 +506,7 @@
     document.getElementById('btn-clear-done').onclick = async () => {
       const uid = auth.currentUser?.uid;
       if (!uid) return;
-      await Promise.all(
-        todos.filter(t => t.done).map(t => deleteDoc(doc(db, 'users', uid, 'todos', t.id)))
-      );
+      await Promise.all(todos.filter(t => t.done).map(t => deleteDoc(doc(db, 'users', uid, 'todos', t.id))));
     };
 
     ['all','active','done'].forEach(f => {
@@ -685,7 +519,91 @@
       };
     });
 
-    // ── Render ───────────────────────────────────────────────
+    // ── Trends ───────────────────────────────────────────────
+
+    window._setTrendDays = days => {
+      trendDays = days;
+      document.getElementById('trend-btn-7').classList.toggle('active',  days === 7);
+      document.getElementById('trend-btn-30').classList.toggle('active', days === 30);
+      renderTrends();
+    };
+
+    function heatColor(count) {
+      if (count === 0) return '#ebedf0';
+      if (count <= 2)  return '#9be9a8';
+      if (count <= 4)  return '#40c463';
+      if (count <= 6)  return '#30a14e';
+      return '#216e39';
+    }
+
+    function renderTrends() {
+      const chart   = document.getElementById('trends-chart');
+      const summary = document.getElementById('trends-summary');
+      if (!chart) return;
+
+      // Build a map of date → count of completions
+      const counts = {};
+      const now    = new Date();
+      for (let i = 0; i < trendDays; i++) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - i);
+        counts[d.toISOString().slice(0, 10)] = 0;
+      }
+      todos.forEach(t => {
+        if (!t.done || !t.completedAt) return;
+        const k = dateKey(t.completedAt);
+        if (k && k in counts) counts[k]++;
+      });
+
+      const days    = Object.keys(counts).sort();
+      const values  = days.map(k => counts[k]);
+      const maxVal  = Math.max(...values, 1);
+      const total   = values.reduce((a, b) => a + b, 0);
+      const streak  = calcStreak(counts);
+
+      if (trendDays === 7) {
+        // Bar chart
+        const bars = days.map(k => {
+          const v    = counts[k];
+          const pct  = Math.round((v / maxVal) * 88) + 12;
+          const label = new Date(k + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'short' });
+          const color = heatColor(v);
+          return `
+            <div class="bar-wrap">
+              <div class="bar" style="height:${pct}%;background:${color}" data-tip="${label}: ${v} done"></div>
+              <span class="bar-label">${label}</span>
+            </div>`;
+        });
+        chart.innerHTML = `<div class="bar-chart">${bars.join('')}</div>`;
+      } else {
+        // Heatmap grid
+        const cells = days.map(k => {
+          const v     = counts[k];
+          const label = new Date(k + 'T12:00:00').toLocaleDateString(undefined, { month:'short', day:'numeric' });
+          return `<div class="heat-cell" style="background:${heatColor(v)}" data-tip="${label}: ${v} done"></div>`;
+        });
+        chart.innerHTML = `<div class="heatmap">${cells.join('')}</div>`;
+      }
+
+      summary.innerHTML = `
+        <div class="trend-stat">Total: <strong>${total}</strong> tasks done</div>
+        <div class="trend-stat">Best day: <strong>${maxVal}</strong> tasks</div>
+        <div class="trend-stat">🔥 Streak: <strong>${streak}</strong> day${streak !== 1 ? 's' : ''}</div>`;
+    }
+
+    function calcStreak(counts) {
+      let streak = 0;
+      const today = new Date().toISOString().slice(0, 10);
+      const sorted = Object.keys(counts).sort().reverse();
+      for (const k of sorted) {
+        if (k > today) continue;
+        if (counts[k] > 0) streak++;
+        else break;
+      }
+      return streak;
+    }
+
+    // ── Render todos ─────────────────────────────────────────
 
     function render() {
       const list = document.getElementById('todo-list');
@@ -717,7 +635,8 @@
                 </div>
                 <div class="todo-meta">
                   ${created ? `<span class="badge created">Created: ${created}</span>` : ''}
-                  ${t.dueAt ? `<span class="badge due ${dueCls}">${dueIcon} ${formatDate(t.dueAt)}</span>` : ''}
+                  ${t.dueAt  ? `<span class="badge due ${dueCls}">${dueIcon} ${formatDate(t.dueAt)}</span>` : ''}
+                  ${t.recur  ? `<span class="badge recur">🔁 ${RECUR_LABELS[t.recur] || t.recur}</span>` : ''}
                 </div>
                 ${isEditing ? `
                   <div class="edit-panel">
@@ -729,6 +648,17 @@
                     <div>
                       <label>Due date &amp; time</label>
                       <input type="datetime-local" id="ep-due-${t.id}" value="${dueVal}" />
+                    </div>
+                    <div>
+                      <label>Repeat</label>
+                      <select id="ep-recur-${t.id}">
+                        <option value=""         ${!t.recur               ? 'selected' : ''}>No repeat</option>
+                        <option value="daily"    ${t.recur==='daily'      ? 'selected' : ''}>Every day</option>
+                        <option value="weekday"  ${t.recur==='weekday'    ? 'selected' : ''}>Every weekday (Mon–Fri)</option>
+                        <option value="weekly"   ${t.recur==='weekly'     ? 'selected' : ''}>Every week</option>
+                        <option value="biweekly" ${t.recur==='biweekly'   ? 'selected' : ''}>Every 2 weeks</option>
+                        <option value="monthly"  ${t.recur==='monthly'    ? 'selected' : ''}>Every month</option>
+                      </select>
                     </div>
                     <div class="edit-panel-actions">
                       <button class="btn-save"   onclick="_saveEdit('${t.id}')">Save</button>
@@ -742,8 +672,8 @@
       }
 
       const active = todos.filter(t => !t.done).length;
-      document.getElementById('count-label').textContent =
-        `${active} task${active !== 1 ? 's' : ''} left`;
+      document.getElementById('count-label').textContent = `${active} task${active !== 1 ? 's' : ''} left`;
+      renderTrends();
     }
 
     // ── Auth state ───────────────────────────────────────────
@@ -761,20 +691,16 @@
         if (unsubscribeFn) unsubscribeFn();
         const q = query(todosCol(user.uid), orderBy('createdAt', 'desc'));
         unsubscribeFn = onSnapshot(q,
-          snap => {
-            todos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            render();
-          },
-          err => {
-            console.error('Firestore error:', err);
+          snap => { todos = snap.docs.map(d => ({ id: d.id, ...d.data() })); render(); },
+          err  => {
+            console.error('Firestore:', err);
             document.getElementById('todo-list').innerHTML =
-              `<li class="empty" style="color:#e74c3c">Error: ${err.message}<br><small>Check Firestore rules in Firebase console.</small></li>`;
+              `<li class="empty" style="color:#e74c3c">Error: ${err.message}<br><small>Check Firestore rules.</small></li>`;
           }
         );
       } else {
         if (unsubscribeFn) { unsubscribeFn(); unsubscribeFn = null; }
-        todos     = [];
-        editingId = null;
+        todos = []; editingId = null;
       }
     });
 

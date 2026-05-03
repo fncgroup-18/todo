@@ -18,7 +18,7 @@
 
     .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
     }
 
     h1 {
@@ -29,15 +29,25 @@
       text-align: center;
     }
 
+    .input-group {
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .input-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 24px;
     }
 
     input[type="text"] {
       flex: 1;
-      padding: 12px 16px;
+      padding: 11px 14px;
       border: 2px solid #e0e0e0;
       border-radius: 10px;
       font-size: 1rem;
@@ -45,12 +55,23 @@
       transition: border-color 0.2s;
     }
 
-    input[type="text"]:focus {
-      border-color: #6c63ff;
+    input[type="text"]:focus { border-color: #6c63ff; }
+
+    input[type="datetime-local"] {
+      flex: 1;
+      padding: 11px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      outline: none;
+      color: #555;
+      transition: border-color 0.2s;
     }
 
+    input[type="datetime-local"]:focus { border-color: #6c63ff; }
+
     button.add-btn {
-      padding: 12px 20px;
+      padding: 11px 20px;
       background: #6c63ff;
       color: #fff;
       border: none;
@@ -59,6 +80,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
+      white-space: nowrap;
     }
 
     button.add-btn:hover { background: #574fd6; }
@@ -95,7 +117,7 @@
 
     .todo-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       background: #fff;
       padding: 14px 16px;
@@ -105,6 +127,7 @@
     }
 
     .todo-item.done { opacity: 0.5; }
+    .todo-item.overdue { border-left: 3px solid #e74c3c; }
 
     .todo-item input[type="checkbox"] {
       width: 18px;
@@ -112,18 +135,59 @@
       accent-color: #6c63ff;
       cursor: pointer;
       flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .todo-body {
+      flex: 1;
+      min-width: 0;
     }
 
     .todo-item .text {
-      flex: 1;
       font-size: 1rem;
       color: #333;
       word-break: break-word;
+      display: block;
     }
 
     .todo-item.done .text {
       text-decoration: line-through;
       color: #aaa;
+    }
+
+    .todo-meta {
+      margin-top: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .badge.created {
+      background: #f0f0ff;
+      color: #6c63ff;
+    }
+
+    .badge.due {
+      background: #fff3e0;
+      color: #e67e22;
+    }
+
+    .badge.due.overdue {
+      background: #fdecea;
+      color: #e74c3c;
+    }
+
+    .badge.due.soon {
+      background: #fff8e1;
+      color: #f39c12;
     }
 
     .todo-item button.delete-btn {
@@ -135,6 +199,7 @@
       line-height: 1;
       transition: color 0.2s;
       flex-shrink: 0;
+      margin-top: 2px;
     }
 
     .todo-item button.delete-btn:hover { color: #e74c3c; }
@@ -170,9 +235,14 @@
   <div class="container">
     <h1>My Todos</h1>
 
-    <div class="input-row">
-      <input type="text" id="todo-input" placeholder="Add a new task…" />
-      <button class="add-btn" onclick="addTodo()">Add</button>
+    <div class="input-group">
+      <div class="input-row">
+        <input type="text" id="todo-input" placeholder="Add a new task…" />
+        <button class="add-btn" onclick="addTodo()">Add</button>
+      </div>
+      <div class="input-row">
+        <input type="datetime-local" id="due-input" />
+      </div>
     </div>
 
     <div class="filters">
@@ -194,6 +264,7 @@
     let filter = 'all';
 
     const input = document.getElementById('todo-input');
+    const dueInput = document.getElementById('due-input');
 
     input.addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
 
@@ -204,8 +275,15 @@
     function addTodo() {
       const text = input.value.trim();
       if (!text) return;
-      todos.unshift({ id: Date.now(), text, done: false });
+      todos.unshift({
+        id: Date.now(),
+        text,
+        done: false,
+        createdAt: new Date().toISOString(),
+        dueAt: dueInput.value ? new Date(dueInput.value).toISOString() : null
+      });
       input.value = '';
+      dueInput.value = '';
       save();
       render();
     }
@@ -237,6 +315,24 @@
       render();
     }
 
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleString(undefined, {
+        month: 'short', day: 'numeric', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    function dueStatus(iso) {
+      if (!iso) return null;
+      const now = Date.now();
+      const due = new Date(iso).getTime();
+      const diff = due - now;
+      if (diff < 0) return 'overdue';
+      if (diff < 60 * 60 * 1000) return 'soon';
+      return 'upcoming';
+    }
+
     function render() {
       const list = document.getElementById('todo-list');
       const visible = todos.filter(t =>
@@ -248,13 +344,26 @@
       if (visible.length === 0) {
         list.innerHTML = '<li class="empty">No tasks here.</li>';
       } else {
-        list.innerHTML = visible.map(t => `
-          <li class="todo-item ${t.done ? 'done' : ''}">
-            <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})" />
-            <span class="text">${escapeHtml(t.text)}</span>
-            <button class="delete-btn" onclick="remove(${t.id})" title="Delete">&#x2715;</button>
-          </li>
-        `).join('');
+        list.innerHTML = visible.map(t => {
+          const status = t.dueAt ? dueStatus(t.dueAt) : null;
+          const isOverdue = !t.done && status === 'overdue';
+          const dueBadgeClass = status === 'overdue' ? 'overdue' : status === 'soon' ? 'soon' : '';
+          const dueLabel = status === 'overdue' ? '&#9888; Overdue' : status === 'soon' ? '&#9200; Due soon' : '&#128337;';
+
+          return `
+            <li class="todo-item ${t.done ? 'done' : ''} ${isOverdue ? 'overdue' : ''}">
+              <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})" />
+              <div class="todo-body">
+                <span class="text">${escapeHtml(t.text)}</span>
+                <div class="todo-meta">
+                  ${t.createdAt ? `<span class="badge created">Created: ${formatDate(t.createdAt)}</span>` : ''}
+                  ${t.dueAt ? `<span class="badge due ${dueBadgeClass}">${dueLabel} ${formatDate(t.dueAt)}</span>` : ''}
+                </div>
+              </div>
+              <button class="delete-btn" onclick="remove(${t.id})" title="Delete">&#x2715;</button>
+            </li>
+          `;
+        }).join('');
       }
 
       const active = todos.filter(t => !t.done).length;
@@ -267,6 +376,7 @@
     }
 
     render();
+    setInterval(render, 60000);
   </script>
 </body>
 </html>

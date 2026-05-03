@@ -760,10 +760,17 @@
 
         if (unsubscribeFn) unsubscribeFn();
         const q = query(todosCol(user.uid), orderBy('createdAt', 'desc'));
-        unsubscribeFn = onSnapshot(q, snap => {
-          todos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-          render();
-        });
+        unsubscribeFn = onSnapshot(q,
+          snap => {
+            todos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            render();
+          },
+          err => {
+            console.error('Firestore error:', err);
+            document.getElementById('todo-list').innerHTML =
+              `<li class="empty" style="color:#e74c3c">Error: ${err.message}<br><small>Check Firestore rules in Firebase console.</small></li>`;
+          }
+        );
       } else {
         if (unsubscribeFn) { unsubscribeFn(); unsubscribeFn = null; }
         todos     = [];
